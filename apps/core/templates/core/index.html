@@ -8,10 +8,18 @@
         One of three columns
       </div>
       <div class="col-sm">
-        One of three columns
+        Ola {{ usuario.funcionario.nome }}
+        <a href="{% url 'list_funcionarios' %}">Gerenciar funcionarios</a>
+        <a href="{% url 'list_departamentos' %}">Gerenciar departamentos</a>
       </div>
       <div class="col-sm">
         <a href="{% url 'logout' %}">logout</a>
+        {% if usuario.funcionario.empresa %}
+          <a href="{% url 'edit_empresa' usuario.funcionario.empresa.id %}">
+            Editar empresa</a>
+        {% else %}
+          <a href="{% url 'create_empresa' %}">Criar empresa</a>
+        {% endif %}
       </div>
     </div>
   </div>
