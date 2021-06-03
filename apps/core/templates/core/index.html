@@ -1,27 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block main %}
-  <h1> Bem vindo </h1>
+  <div class="jumbotron">
+  <h1> Bem vindo ao sistema de gestão de RH</h1>
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        One of three columns
-      </div>
-      <div class="col-sm">
-        Ola {{ usuario.funcionario.nome }}
-        <a href="{% url 'list_funcionarios' %}">Gerenciar funcionarios</a>
-        <a href="{% url 'list_departamentos' %}">Gerenciar departamentos</a>
-        <a href="{% url 'list_horas' %}">Gerenciar banco de horas</a>
-      </div>
-      <div class="col-sm">
-        <a href="{% url 'logout' %}">logout</a>
+        <a href="{% url 'list_funcionarios' %}" class="btn btn-primary">Gerenciar funcionarios</a>
+        <a href="{% url 'list_departamentos' %}" class="btn btn-primary">Gerenciar departamentos</a>
+        <a href="{% url 'list_horas' %}" class="btn btn-primary">Gerenciar banco de horas</a>
         {% if usuario.funcionario.empresa %}
-          <a href="{% url 'edit_empresa' usuario.funcionario.empresa.id %}">
+          <a href="{% url 'edit_empresa' usuario.funcionario.empresa.id %}"
+          class="btn btn-success">
             Editar empresa</a>
         {% else %}
           <a href="{% url 'create_empresa' %}">Criar empresa</a>
         {% endif %}
+        <a href="{% url 'logout' %}"
+        class="btn btn-danger">logout</a>
       </div>
     </div>
+  </div>
+    <br>
+  <img src="{% static 'Python.jpg' %}" style="display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 40%;">
   </div>
 {% endblock %}
