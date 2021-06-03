@@ -29,24 +29,20 @@ class PegaUser:
         self.pega = ''
 
 
-# TODO: refact method
-class FuncionariosCreate(CreateView):  # need refact
+class FuncionariosCreate(CreateView):
     model = Funcionario
     fields = ['nome', 'departamentos']
 
-    def form_valid(self, form):  # nao funciona!
-        pegauser = PegaUser()
-        print(self.request)
-        pegauser.pega = self.request.user
-        print(pegauser.pega)
+    def form_valid(self, form):
         funcionario = form.save(commit=False) # salva na memoria e nao no BD
         username = funcionario.nome.split(' ')[0] +'at'+funcionario.nome.split(' ')[1]
-        print(username)
+        print('username: ', username)
         funcionario.empresa = self.request.user.funcionario.empresa
-        funcionario.user = pegauser.pega
-        # funcionario.user = User.objects.create(username=username)
-        # funcionario.user = self.request.user
-        # print(funcionario.user)
+        print('funcionario.empresa = ', funcionario.empresa)
+        funcionario.user = User.objects.create(username=username)
+        print('funcionario.user = ', funcionario.user)
+        funcionario.user = self.request.user
+        print('funcionario.user apos self.request = ', funcionario.user)
         funcionario.save()
         return super(FuncionariosCreate, self).form_valid(form)
 #             return redirect('list_funcionarios')

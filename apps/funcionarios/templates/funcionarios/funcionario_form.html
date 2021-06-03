@@ -2,9 +2,19 @@
 {% load bootstrap %}
 
 {% block main %}
+    {{ object }}
+    {{ object.id }}
     <form method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
         <button type="submit">Salvar</button>
     </form>
+
+<!--problema de no reverse match-->
+    {% if object %}
+<!--    url 'create_documento' object.id -->
+    <a href="{% url 'create_documento'  %}" class="btn btn-success">
+        Adicionar documento
+    </a>
+    {% endif %}
 {% endblock %}

@@ -6,7 +6,7 @@ from apps.empresas.models import Empresa
 
 
 class Funcionario(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(max_length=100, null=True, blank=True)
     User = models.OneToOneField(User, on_delete=models.PROTECT, null=True, blank=True)
     departamentos = models.ManyToManyField(Departamento)
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT, null=True, blank=True)
